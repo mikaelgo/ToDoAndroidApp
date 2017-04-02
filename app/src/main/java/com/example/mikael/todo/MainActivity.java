@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     //Defining variables
     private FloatingActionButton fab;
     private Realm realm;
+    private String Mikael;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
