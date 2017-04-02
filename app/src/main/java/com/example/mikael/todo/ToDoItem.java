@@ -8,8 +8,10 @@ import io.realm.RealmObject;
 
 public class ToDoItem extends RealmObject {
 
+    //Defining the varible
     private String todoTitle;
 
+    //Generating the getters and setters
     public String getTodoTitle() {
         return todoTitle;
     }

@@ -32,6 +32,7 @@ public class ToDoAdapter extends RealmRecyclerViewAdapter<ToDoItem, ToDoAdapter.
 
     public class ToDoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        //Defining the variables
         private TextView titleTextView;
         private Button doneButton;
 
@@ -50,18 +51,21 @@ public class ToDoAdapter extends RealmRecyclerViewAdapter<ToDoItem, ToDoAdapter.
         }
     }
 
+    //Inflating the layout and returning the holder
     @Override
     public ToDoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_todo_item, parent, false);
         return new ToDoViewHolder(itemView);
     }
 
+    //Populating data to the item via holder
     @Override
     public void onBindViewHolder(ToDoViewHolder holder, int position) {
         ToDoItem toDoItem = getData().get(position);
         holder.titleTextView.setText(toDoItem.getTodoTitle());
     }
 
+    //Method for removing items from the database
     public void removeToDo(final int position){
         Realm realm = null;
 
@@ -71,15 +75,15 @@ public class ToDoAdapter extends RealmRecyclerViewAdapter<ToDoItem, ToDoAdapter.
 
                 @Override
                 public void execute(Realm realm) {
-
+                    //Checking whats in the database
                     RealmResults<ToDoItem> realmResults = realm.where(ToDoItem.class).findAll();
+                    //Deleting item from the db
                     realmResults.deleteFromRealm(position);
                     notifyItemRemoved(position);
                     System.out.println(realmResults);
                 }
             });
-        }
-        finally {
+        } finally {
 
             if(realm != null){
                 realm.close();
